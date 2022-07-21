@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+.mono{
+    font-family: 'Roboto Mono', monospace;
+}
+
+@import 'typography';
+@import 'helpers';
+@import 'spacing';
+@import 'grid';
+
+:root{
+    --color-bg: #f0f0f0;
+    --color-blue: #111dd1;
+}
+
+body{
+    background: var(--color-bg);
+    color: var(--color-blue);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+*{
+    // outline: 1px solid rgba(47, 255, 134, 0.454);
+}
+
+#paper{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/assets/paper.b5ef969.jpg);
+    background-position: top;
+    background-repeat: repeat;
+    background-position: 50%;
+    background-size: 100% auto;
+    pointer-events: none;
+    mix-blend-mode: color-burn;
+    z-index: 10;
+    opacity: .25;
+}
+
+.container{
+    margin: 0 auto;
+    padding: 20px 30px;
+    max-width: 1600px;
+    width: 100%;
+    .content{
+        position: relative;
+        padding: 50px;
+        &::before{
+            content: '';
+            top: 0px;
+            left: 0px;
+            bottom: 0px;
+            position: absolute;
+            height: 100%;
+            width: 20px;
+            background-image: url(/assets/paperspiral.png);
+            background-size: contain;
+            background-repeat: repeat-y;
+        }
+    }
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    margin: 0px -10px 0px -10px;
+    &-box{
+        background: var(--color-blue);
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .hero-logo{
+            font-size: 30px;
+            padding: 2px 10px;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 40px;
+        }
+    }
+    .section{
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        border-left: 1px solid white;
+    }
+}
+
+#pen{
+    position: fixed;
+    background-image: url(/assets/pencil.4425ad4.png);
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.value-field{
+    background: white;
+    padding: 5px 10px;
+    color: var(--color-blue);
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.button{
+    padding: 10px 20px;
+    border-radius: 1000px;
+    border: none;
+    background: var(--color-blue);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    cursor: pointer;
+    &.large{
+        width: 100%;
+    }
+    &:hover{
+        background: transparent;
+        border: 1px solid var(--color-blue);
+        color: var(--color-blue);
+    }
+}
+
+table{
+    width: 100%;
+    border: 1px solid var(--color-blue);
+    border-collapse: collapse;
+    border-top: 5px solid var(--color-blue);
+    td{
+        border: 1px solid var(--color-blue);
+    }
+}
