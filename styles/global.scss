@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'IBM Plex Sans', sans-serif;
+    cursor: none;
 }
 .mono{
     font-family: 'Roboto Mono', monospace;
@@ -18,6 +19,8 @@
 :root{
     --color-bg: #f0f0f0;
     --color-blue: #111dd1;
+    --color-blue-dim: #111ed158;
+    --color-blue-dim-2: #111ed12a;
 }
 
 body{
@@ -44,7 +47,7 @@ body{
     background-size: 100% auto;
     pointer-events: none;
     mix-blend-mode: color-burn;
-    z-index: 10;
+    z-index: 1000;
     opacity: .25;
 }
 
@@ -69,6 +72,10 @@ body{
             background-repeat: repeat-y;
         }
     }
+}
+
+.no-scroll{
+    overflow: hidden;
 }
 
 .navbar{
@@ -106,9 +113,11 @@ body{
     background-image: url(../assets/pencil.4425ad4.png);
     width: 70px;
     height: 70px;
+    z-index: 999;
     pointer-events: none;
     background-repeat: no-repeat;
     background-size: contain;
+    transform: translateY(-200%);
 }
 
 .value-field{
@@ -135,6 +144,14 @@ body{
     &.large{
         width: 100%;
     }
+    &.secondary{
+        background: transparent;
+        border: 1px solid var(--color-blue);
+        color: var(--color-blue);
+        &:hover{
+            background: var(--color-blue-dim-2);
+        }
+    }
     &:hover{
         background: transparent;
         border: 1px solid var(--color-blue);
@@ -149,5 +166,112 @@ table{
     border-top: 5px solid var(--color-blue);
     td{
         border: 1px solid var(--color-blue);
+    }
+}
+
+.image-hero{
+    position: absolute; 
+    right: 0px; 
+    width: 50%; 
+    z-index: -1; 
+    max-height: 550px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.modal-container{
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: .2s ease-in-out;
+    z-index: 100;
+    padding: 30px 10px;
+    overflow: auto;
+    background: var(--color-blue-dim);
+    &.open{
+        opacity: 1;
+        visibility: visible;
+        .modal-wrapper{
+            transform: translateY(0%);
+        }
+    }
+    .modal-wrapper{
+        transform: translateY(50%);
+        transition: 0.2s ease-in-out;
+        background: var(--color-bg);
+        color: var(--color-blue);
+        padding: 0px 40px 40px 40px;
+        border: 1px solid var(--color-blue);
+        border-top-width: 3px;
+        max-width: 600px;
+        width: 100%;
+        .modal-header{
+            margin-inline: -40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--color-blue);
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            justify-content: space-between;
+            .modal-title{
+                padding: 20px 40px;
+            }
+            button{
+                width: 65px;
+                border: none;
+                border-left: 1px solid var(--color-blue);
+                color: var(--color-blue);
+                padding: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                & *{
+                    cursor: pointer;
+                }
+                svg{
+                    width: 40px;
+                }
+                &:hover{
+                    background: white;
+                }
+            }
+        }
+    }
+}
+
+input{
+    padding: 15px 12px;
+    font-size: 18px;
+    font-family: 'Roboto Mono', monospace;
+    border: 1px solid var(--color-blue);
+    background: var(--color-bg);
+    outline: none;
+    position: relative;
+    width: 100%;
+}
+
+label{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    &:focus-within{
+        &::before{
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            width: 100%;
+            background: var(--color-blue);
+        }
     }
 }

@@ -6,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PaperSite</title>
     <link rel="stylesheet" href="styles/global.css">
+    <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
-<body x-data="{ mouse: {x: 100, y: 100}, mousemove:(e)=>{
-    mouse.x = e.screenX; mouse.y = e.screenY
-} }" x-on:mouseover="mousemove">
+<body x-data="{ mouse: {x: 100, y: 100}, mousemove(e){
+    this.mouse.x = e.screenX; this.mouse.y = e.screenY
+},
+modal: false,
+ageverification: $persist(true) }" @mousemove="mousemove" :class="modal? 'no-scroll':''">
     <div class="container">
         <nav class="navbar">
             <div class="navbar-box">
-                <span class="hero-logo"><abbr title="University of Bureaucracy">UOB</abbr></span>
+                <span class="hero-logo">EPSILON</span>
                 <div class="section">
                     <div class="flex-row gap-10">
-                        <span class="mono uppercase text-xs">Number of<br> students</span>
+                        <span class="mono uppercase text-xs">Number of<br> winners</span>
                         <span class="value-field">1500</span>
                     </div>
                 </div>
@@ -30,13 +33,14 @@
             </div>
         </nav>
         <div class="content">
-            <h1 class="text-8xl uppercase fw-900 mb-5">A winner takes<br> all MMO-SAT*</h1>
-            <span class="text-4xl fw-300">Pay 52$. Take the MSAT. <br>Highest score wins the entire pot.</span>
+            <img src="https://mschfboard.org/images/desk.png" alt="" class="image-hero">
+            <h1 class="text-8xl uppercase fw-900 mb-5">THE EPSILON<br>PROGRAM*</h1>
+            <span class="text-4xl fw-300">Pay 52$. Pray & wait. <br>One lucky kid wins the entire pot.</span>
             <table class="mb-5 mt-5" style="max-width: 600px">
                 <thead>
                     <tr>
                         <td colspan="3" class="p-2">
-                            <button class="button text-3xl large">View test Result</button>
+                            <button class="button text-3xl large" @click.stop="modal=true">Participate Now</button>
                         </td>
                     </tr>
                 </thead>
@@ -49,18 +53,84 @@
                 </tbody>
             </table>
             <div class="grid">
-                <div class="col-4 flex-col">
-                    <span class="text-3xl fw-700 mb-3">Hello World</span>
-                    <p class="text-xl fw-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia tenetur qui iure, deserunt quae fugiat porro atque dolorum laborum impedit aspernatur eaque distinctio maiores. Necessitatibus quo nostrum obcaecati nulla molestiae.</p>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 flex-col">
+                    <span class="text-3xl fw-700 mb-3">Crypto based</span>
+                    <p class="text-xl fw-300 mono">We use very complex crypto algorithm stolen from the metaverse to enhance your chance to win and become rich and get a lambo..</p>
                 </div>
-                <div class="col-4 flex-col">
-                    <span class="text-3xl fw-700 mb-3">Hello World</span>
-                    <p class="text-xl fw-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia tenetur qui iure, deserunt quae fugiat porro atque dolorum laborum impedit aspernatur eaque distinctio maiores. Necessitatibus quo nostrum obcaecati nulla molestiae.</p>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 flex-col">
+                    <span class="text-3xl fw-700 mb-3">Web 6.0 Technologies</span>
+                    <p class="text-xl fw-300 mono">YES, as you read web 6 tech stolen wich was provided to us from a kind time traveler.</p>
                 </div>
-                <div class="col-4 flex-col">
-                    <span class="text-3xl fw-700 mb-3">Hello World</span>
-                    <p class="text-xl fw-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia tenetur qui iure, deserunt quae fugiat porro atque dolorum laborum impedit aspernatur eaque distinctio maiores. Necessitatibus quo nostrum obcaecati nulla molestiae.</p>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 flex-col">
+                    <span class="text-3xl fw-700 mb-3">Epsilon who ?</span>
+                    <p class="text-xl fw-300 mono">We are Lorem ipsum dolor Inc. consectetur adipisicing elit. Officia tenetur qui iure.</p>
                 </div>
+                <div class="col-12 flex-col">
+                    <span class="fw-300 mt-4">Copyright is for weaks only. we don't do that.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-container" :class="modal ? 'open': ''" @click.away="modal=false">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                <span class="modal-title">Participate</span>
+                <button @click="modal=false"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                  </svg></button>
+            </div>
+            <div class="flex-col" x-data="{form:{}, submited: false}">
+                <div class="flex-col gap-20" x-show="!submited">
+                    <h1 class="fw-600">Let's get started</h1>
+                    <p>First of all give us your bank account</p>
+                    <div class="grid">
+                        <div class="col-12">
+                            <label>
+                                Card Number
+                                <input type="text" x-model.number="form.card_number" placeholder="0000 0000 0000 0000">
+                            </label>
+                        </div>
+                        <div class="col-8">
+                            <label>
+                                Expiration Date
+                                <input type="text" x-model.number="form.expiration" placeholder="MM / YY">
+                            </label>
+                        </div>
+                        <div class="col-4">
+                            <label>
+                                CVC
+                                <input type="text" x-model.number="form.cvc" placeholder="MM / YY">
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <button class="button large text-xl" @click="submited = true">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-col gap-20" x-show="submited">
+                    <h1 class="text-5xl">Good luck</h1>
+                    <span class="text-xl">Come back after 1 month to see if you won.</span>
+                    <span class="text-xl">Now F**K OFF, bandwidth doesn't grow on trees.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-container" :class="ageverification ? 'open': ''" x-data="{iskid:false}">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                <span class="modal-title">Age Verification</span>
+                <button disabled class="op-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                  </svg></button>
+            </div>
+            <div class="flex-col gap-20" x-show="!iskid">
+                <h1 class="fw-600">Are you over 18 year old ?</h1>
+                <button class="button text-2xl" @click="ageverification = false">YES</button>
+                <button class="button secondary text-2xl" @click="iskid=true">NO</button>
+            </div>
+            <div class="flex-col gap-20 text-center" x-show="iskid">
+                <p class="text-2xl fw-500">Being Honest doesn't always help.</p>
+                <button class="button secondary" @click="iskid=false">Go back & lie</button>
             </div>
         </div>
     </div>
